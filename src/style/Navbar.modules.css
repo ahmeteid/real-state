@@ -33,7 +33,7 @@
 }
 
 .logo:hover a {
-    color: var(--second-color);
+    color: var(--accent-color);
     transform: scale(1.1);
     -webkit-transform: scale(1.1);
     -moz-transform: scale(1.1);
@@ -78,10 +78,10 @@
 }
 
 .nav-links li a {
-    border: 2px solid var(--border-color);
+    border: 2px solid var(--accent-color);
     padding: 5px 10px;
-    background-color: var(--primary-color);
-    color: var(--second-color);
+    background-color: var(--secondary-color);
+    color: var(--accent-color);
     border-radius: var(--border-radius);
     -webkit-border-radius: var(--border-radius);
     -moz-border-radius: var(--border-radius);
@@ -96,9 +96,11 @@
 
 .nav-links li a:hover,
 .nav-links li a.active {
-    color: var(--primary-color);
-    background-color: var(--second-color);
-    border-color: var(--second-color);
+    color: var(--secondary-color);
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(74, 144, 226, 0.2);
 }
 
 /* End Nav Links */
@@ -177,7 +179,7 @@
 }
 
 .drop-down-list a {
-    color: var(--second-color);
+    color: var(--accent-color);
     width: 100%;
     padding: 5px 10px;
     font-weight: 600;
@@ -197,8 +199,8 @@
 
 .drop-down-list a:hover,
 .drop-down-list a.active {
-    color: var(--primary-color);
-    background-color: var(--second-color);
+    color: var(--secondary-color);
+    background-color: var(--accent-color);
     font-weight: 600;
 }
 

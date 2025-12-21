@@ -1,0 +1,189 @@
+{
+  "propertiesForSale": [
+    {
+      "id": 1,
+      "title": "Modern Villa",
+      "location": "Downtown District",
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "area": "2500 sqft",
+      "price": "$450,000",
+      "description": "Beautiful modern villa with stunning views and premium finishes."
+    },
+    {
+      "id": 2,
+      "title": "Luxury Apartment",
+      "location": "City Center",
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "area": "1800 sqft",
+      "price": "$320,000",
+      "description": "Spacious apartment in the heart of the city with modern amenities."
+    },
+    {
+      "id": 3,
+      "title": "Family House",
+      "location": "Suburban Area",
+      "bedrooms": 5,
+      "bathrooms": 4,
+      "area": "3200 sqft",
+      "price": "$580,000",
+      "description": "Perfect family home with large garden and garage."
+    },
+    {
+      "id": 4,
+      "title": "Penthouse Suite",
+      "location": "Skyline Tower",
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "area": "2800 sqft",
+      "price": "$750,000",
+      "description": "Luxurious penthouse with panoramic city views."
+    },
+    {
+      "id": 5,
+      "title": "Cozy Cottage",
+      "location": "Quiet Neighborhood",
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "area": "1200 sqft",
+      "price": "$195,000",
+      "description": "Charming cottage perfect for first-time buyers."
+    },
+    {
+      "id": 6,
+      "title": "Estate Home",
+      "location": "Exclusive Area",
+      "bedrooms": 6,
+      "bathrooms": 5,
+      "area": "4500 sqft",
+      "price": "$1,200,000",
+      "description": "Magnificent estate with pool and extensive grounds."
+    }
+  ],
+  "propertiesForRent": [
+    {
+      "id": 1,
+      "title": "Studio Apartment",
+      "location": "Downtown District",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "area": "600 sqft",
+      "price": "$800/month",
+      "description": "Cozy studio perfect for students or young professionals."
+    },
+    {
+      "id": 2,
+      "title": "2 Bedroom Flat",
+      "location": "City Center",
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "area": "950 sqft",
+      "price": "$1,200/month",
+      "description": "Modern flat with balcony and city views."
+    },
+    {
+      "id": 3,
+      "title": "3 Bedroom House",
+      "location": "Suburban Area",
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "area": "1500 sqft",
+      "price": "$1,800/month",
+      "description": "Spacious house with garden, ideal for families."
+    },
+    {
+      "id": 4,
+      "title": "Luxury Apartment",
+      "location": "Waterfront",
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "area": "1800 sqft",
+      "price": "$2,500/month",
+      "description": "Premium apartment with ocean views and amenities."
+    },
+    {
+      "id": 5,
+      "title": "1 Bedroom Condo",
+      "location": "Business District",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "area": "750 sqft",
+      "price": "$950/month",
+      "description": "Well-maintained condo close to business centers."
+    },
+    {
+      "id": 6,
+      "title": "4 Bedroom Villa",
+      "location": "Exclusive Area",
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "area": "2200 sqft",
+      "price": "$3,200/month",
+      "description": "Luxurious villa with pool and modern facilities."
+    }
+  ],
+  "cars": [
+    {
+      "id": 1,
+      "title": "BMW 3 Series",
+      "year": 2022,
+      "mileage": "15,000 km",
+      "fuel": "Petrol",
+      "transmission": "Automatic",
+      "price": "$35,000",
+      "description": "Premium sedan with advanced features and excellent condition."
+    },
+    {
+      "id": 2,
+      "title": "Mercedes-Benz C-Class",
+      "year": 2021,
+      "mileage": "20,000 km",
+      "fuel": "Petrol",
+      "transmission": "Automatic",
+      "price": "$38,500",
+      "description": "Luxury car with leather interior and sunroof."
+    },
+    {
+      "id": 3,
+      "title": "Toyota Camry",
+      "year": 2023,
+      "mileage": "8,000 km",
+      "fuel": "Hybrid",
+      "transmission": "Automatic",
+      "price": "$28,000",
+      "description": "Reliable and fuel-efficient, perfect for daily commute."
+    },
+    {
+      "id": 4,
+      "title": "Audi A4",
+      "year": 2022,
+      "mileage": "12,000 km",
+      "fuel": "Petrol",
+      "transmission": "Automatic",
+      "price": "$42,000",
+      "description": "Sporty design with cutting-edge technology."
+    },
+    {
+      "id": 5,
+      "title": "Honda Accord",
+      "year": 2021,
+      "mileage": "25,000 km",
+      "fuel": "Petrol",
+      "transmission": "CVT",
+      "price": "$24,500",
+      "description": "Well-maintained family car with great fuel economy."
+    },
+    {
+      "id": 6,
+      "title": "Tesla Model 3",
+      "year": 2023,
+      "mileage": "5,000 km",
+      "fuel": "Electric",
+      "transmission": "Automatic",
+      "price": "$45,000",
+      "description": "Eco-friendly electric vehicle with autopilot features."
+    }
+  ]
+}
+

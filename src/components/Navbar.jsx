@@ -39,6 +39,9 @@ function Navbar() {
           <li>
             <NavLink to={"/Car_Sale"}>Car Sale</NavLink>
           </li>
+          <li>
+            <NavLink to={"/dashboard"}>Dashboard</NavLink>
+          </li>
         </ul>
         <div className={`drop-list ${isDropdownOpen ? "active" : ""}`}>
           <ul className="drop-down-list">
@@ -70,6 +73,11 @@ function Navbar() {
             <li>
               <NavLink to={"/Car_Sale"} onClick={closeDropdown}>
                 Car Sale
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={"/dashboard"} onClick={closeDropdown}>
+                Dashboard
               </NavLink>
             </li>
           </ul>

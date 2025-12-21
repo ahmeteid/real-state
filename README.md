@@ -1,16 +1,86 @@
-# React + Vite
+# Real State - React Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A real estate website built with React and Vite, featuring property listings for sale, rentals, and car sales.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🏠 Property listings for sale
+- 🏘️ Rental property listings
+- 🚗 Car sales listings
+- 📧 Contact form
+- ℹ️ About page
+- 📱 Responsive design
 
-## React Compiler
+## Getting Started
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+### Prerequisites
 
-## Expanding the ESLint configuration
+- Node.js (v14 or higher)
+- npm or yarn
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Installation
+
+1. Install dependencies:
+```bash
+npm install
+```
+
+### Running the Application
+
+You need to run two servers:
+
+1. **Start JSON Server** (for API data):
+```bash
+npm run server
+```
+This will start JSON Server on `http://localhost:3001`
+
+2. **Start the React development server** (in a new terminal):
+```bash
+npm run dev
+```
+This will start the Vite dev server, typically on `http://localhost:5173`
+
+### Data Structure
+
+All data is stored in `data/db.json` with the following endpoints:
+- `/propertiesForSale` - Properties available for purchase
+- `/propertiesForRent` - Properties available for rent
+- `/cars` - Vehicles for sale
+
+### Available Scripts
+
+- `npm run dev` - Start the React development server
+- `npm run server` - Start JSON Server on port 3001
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+
+## Project Structure
+
+```
+real-state/
+├── data/
+│   └── db.json          # JSON Server database
+├── src/
+│   ├── components/      # React components
+│   ├── pages/           # Page components
+│   ├── style/           # CSS modules
+│   └── App.jsx          # Main app component
+└── package.json
+```
+
+## Technologies Used
+
+- React 19
+- React Router DOM
+- Vite
+- JSON Server
+- React Icons
+- CSS Modules
+
+## Notes
+
+- Make sure JSON Server is running before using the application
+- The API runs on port 3001 by default
+- Data can be modified directly in `data/db.json`
