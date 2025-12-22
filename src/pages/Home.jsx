@@ -1,17 +1,16 @@
 import Services_Card from "../components/Services_Card";
 import "../style/Home.modules.css";
+import { useTranslation } from "react-i18next";
 
 function Home() {
+  const { t } = useTranslation();
+
   return (
     <>
       <div className="home-container">
         <div className="hero-section">
-          <h1>Welcome to Real State</h1>
-          <p>
-            Your one-stop destination for finding the perfect home, rental
-            property, or vehicle. Explore our wide selection of properties and
-            cars to find exactly what you're looking for.
-          </p>
+          <h1>{t("home.title")}</h1>
+          <p>{t("home.description")}</p>
         </div>
         <Services_Card />
       </div>

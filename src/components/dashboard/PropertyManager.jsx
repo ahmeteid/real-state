@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import "../../style/Dashboard.modules.css";
 import database from "../../services/database";
 import { FaEdit, FaTrash, FaPlus, FaTimes } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 function PropertyManager({ type, onUpdate }) {
+  const { t } = useTranslation();
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -16,6 +18,7 @@ function PropertyManager({ type, onUpdate }) {
     area: "",
     price: "",
     description: "",
+    images: [],
   });
 
   useEffect(() => {
@@ -41,6 +44,48 @@ function PropertyManager({ type, onUpdate }) {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files);
+    if (files.length > 0) {
+      const validFiles = files.filter((file) => {
+        if (!file.type.startsWith("image/")) {
+          alert(t("dashboard.propertyManager.invalidImageType"));
+          return false;
+        }
+        if (file.size > 5 * 1024 * 1024) {
+          alert(t("dashboard.propertyManager.imageTooLarge"));
+          return false;
+        }
+        return true;
+      });
+
+      const readers = validFiles.map((file) => {
+        return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.readAsDataURL(file);
+        });
+      });
+
+      Promise.all(readers).then((results) => {
+        setFormData({
+          ...formData,
+          images: [...formData.images, ...results],
+        });
+      });
+    }
+    // Reset file input to allow selecting the same file again
+    e.target.value = "";
+  };
+
+  const removeImage = (index) => {
+    const newImages = formData.images.filter((_, i) => i !== index);
+    setFormData({
+      ...formData,
+      images: newImages,
     });
   };
 
@@ -79,20 +124,21 @@ function PropertyManager({ type, onUpdate }) {
       area: property.area,
       price: property.price,
       description: property.description,
+      images: property.images || (property.image ? [property.image] : []),
     });
     setEditingId(property.id);
     setShowForm(true);
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this property?")) {
+    if (window.confirm(t("dashboard.propertyManager.deleteConfirm"))) {
       try {
         await database.deleteProperty(type, id);
         loadProperties();
         onUpdate();
       } catch (error) {
         console.error("Error deleting property:", error);
-        alert("Error deleting property. Please try again.");
+        alert(t("dashboard.propertyManager.deleteError"));
       }
     }
   };
@@ -106,21 +152,36 @@ function PropertyManager({ type, onUpdate }) {
       area: "",
       price: "",
       description: "",
+      images: [],
     });
     setEditingId(null);
     setShowForm(false);
+    // Reset file input
+    const fileInput = document.querySelector(
+      'input[type="file"][name="images"]'
+    );
+    if (fileInput) {
+      fileInput.value = "";
+    }
   };
 
   if (loading) {
-    return <div className="loading">Loading properties...</div>;
+    return (
+      <div className="loading">{t("dashboard.propertyManager.loading")}</div>
+    );
   }
 
   return (
     <div className="manager-container">
       <div className="manager-header">
-        <h2>Manage Properties for {type === "sale" ? "Sale" : "Rent"}</h2>
+        <h2>
+          {t("dashboard.propertyManager.manageProperties")}{" "}
+          {type === "sale"
+            ? t("dashboard.propertyManager.sale")
+            : t("dashboard.propertyManager.rent")}
+        </h2>
         <button className="add-btn" onClick={() => setShowForm(true)}>
-          <FaPlus /> Add New Property
+          <FaPlus /> {t("dashboard.propertyManager.addNewProperty")}
         </button>
       </div>
 
@@ -128,7 +189,11 @@ function PropertyManager({ type, onUpdate }) {
         <div className="form-modal">
           <div className="form-modal-content">
             <div className="form-modal-header">
-              <h3>{editingId ? "Edit Property" : "Add New Property"}</h3>
+              <h3>
+                {editingId
+                  ? t("dashboard.propertyManager.editProperty")
+                  : t("dashboard.propertyManager.addNewPropertyTitle")}
+              </h3>
               <button className="close-btn" onClick={resetForm}>
                 <FaTimes />
               </button>
@@ -136,7 +201,7 @@ function PropertyManager({ type, onUpdate }) {
             <form onSubmit={handleSubmit} className="property-form">
               <div className="form-row">
                 <div className="form-group">
-                  <label>Title *</label>
+                  <label>{t("dashboard.propertyManager.title")} *</label>
                   <input
                     type="text"
                     name="title"
@@ -146,7 +211,7 @@ function PropertyManager({ type, onUpdate }) {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Location *</label>
+                  <label>{t("dashboard.propertyManager.location")} *</label>
                   <input
                     type="text"
                     name="location"
@@ -158,7 +223,7 @@ function PropertyManager({ type, onUpdate }) {
               </div>
               <div className="form-row">
                 <div className="form-group">
-                  <label>Bedrooms *</label>
+                  <label>{t("dashboard.propertyManager.bedrooms")} *</label>
                   <input
                     type="number"
                     name="bedrooms"
@@ -169,7 +234,7 @@ function PropertyManager({ type, onUpdate }) {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Bathrooms *</label>
+                  <label>{t("dashboard.propertyManager.bathrooms")} *</label>
                   <input
                     type="number"
                     name="bathrooms"
@@ -180,32 +245,34 @@ function PropertyManager({ type, onUpdate }) {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Area *</label>
+                  <label>{t("dashboard.propertyManager.area")} *</label>
                   <input
                     type="text"
                     name="area"
                     value={formData.area}
                     onChange={handleInputChange}
-                    placeholder="e.g., 2500 sqft"
+                    placeholder={t("dashboard.propertyManager.areaPlaceholder")}
                     required
                   />
                 </div>
               </div>
               <div className="form-group">
-                <label>Price *</label>
+                <label>{t("dashboard.propertyManager.price")} *</label>
                 <input
                   type="text"
                   name="price"
                   value={formData.price}
                   onChange={handleInputChange}
                   placeholder={
-                    type === "sale" ? "e.g., $450,000" : "e.g., $800/month"
+                    type === "sale"
+                      ? t("dashboard.propertyManager.pricePlaceholderSale")
+                      : t("dashboard.propertyManager.pricePlaceholderRent")
                   }
                   required
                 />
               </div>
               <div className="form-group">
-                <label>Description *</label>
+                <label>{t("dashboard.propertyManager.description")} *</label>
                 <textarea
                   name="description"
                   value={formData.description}
@@ -214,16 +281,120 @@ function PropertyManager({ type, onUpdate }) {
                   required
                 />
               </div>
+              <div className="form-group">
+                <label>{t("dashboard.propertyManager.images")}</label>
+                <input
+                  type="file"
+                  name="images"
+                  accept="image/*"
+                  multiple
+                  onChange={handleImageChange}
+                  style={{
+                    padding: "8px",
+                    border: "1px solid #ddd",
+                    borderRadius: "4px",
+                    width: "100%",
+                  }}
+                  title={t("dashboard.propertyManager.imagesPlaceholder")}
+                />
+                {formData.images.length > 0 && (
+                  <div style={{ marginTop: "10px" }}>
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns:
+                          "repeat(auto-fill, minmax(120px, 1fr))",
+                        gap: "10px",
+                        marginBottom: "10px",
+                      }}
+                    >
+                      {formData.images.map((image, index) => (
+                        <div
+                          key={index}
+                          style={{
+                            position: "relative",
+                            border: "2px solid #ddd",
+                            borderRadius: "8px",
+                            overflow: "hidden",
+                          }}
+                        >
+                          <img
+                            src={image}
+                            alt={`Preview ${index + 1}`}
+                            style={{
+                              width: "100%",
+                              height: "100px",
+                              objectFit: "cover",
+                              display: "block",
+                            }}
+                            onError={(e) => {
+                              e.target.style.display = "none";
+                            }}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => removeImage(index)}
+                            style={{
+                              position: "absolute",
+                              top: "4px",
+                              right: "4px",
+                              padding: "2px 6px",
+                              backgroundColor: "#e74c3c",
+                              color: "white",
+                              border: "none",
+                              borderRadius: "4px",
+                              cursor: "pointer",
+                              fontSize: "12px",
+                              fontWeight: "bold",
+                            }}
+                          >
+                            ×
+                          </button>
+                          <div
+                            style={{
+                              position: "absolute",
+                              bottom: "4px",
+                              left: "4px",
+                              backgroundColor: "rgba(0,0,0,0.6)",
+                              color: "white",
+                              padding: "2px 6px",
+                              borderRadius: "4px",
+                              fontSize: "10px",
+                            }}
+                          >
+                            {index + 1}/{formData.images.length}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <p
+                      style={{
+                        fontSize: "12px",
+                        color: "#666",
+                        marginTop: "5px",
+                      }}
+                    >
+                      {formData.images.length}{" "}
+                      {formData.images.length === 1
+                        ? t("dashboard.propertyManager.image")
+                        : t("dashboard.propertyManager.images")}
+                    </p>
+                  </div>
+                )}
+              </div>
               <div className="form-actions">
                 <button
                   type="button"
                   className="cancel-btn"
                   onClick={resetForm}
                 >
-                  Cancel
+                  {t("dashboard.propertyManager.cancel")}
                 </button>
                 <button type="submit" className="save-btn">
-                  {editingId ? "Update" : "Add"} Property
+                  {editingId
+                    ? t("dashboard.propertyManager.update")
+                    : t("dashboard.propertyManager.add")}{" "}
+                  {t("dashboard.propertyManager.property")}
                 </button>
               </div>
             </form>
@@ -234,7 +405,7 @@ function PropertyManager({ type, onUpdate }) {
       <div className="properties-list">
         {properties.length === 0 ? (
           <div className="empty-state">
-            No properties found. Add your first property!
+            {t("dashboard.propertyManager.noProperties")}
           </div>
         ) : (
           properties.map((property) => (
@@ -243,8 +414,12 @@ function PropertyManager({ type, onUpdate }) {
                 <h3>{property.title}</h3>
                 <p className="property-location">{property.location}</p>
                 <div className="property-details">
-                  <span>{property.bedrooms} Beds</span>
-                  <span>{property.bathrooms} Baths</span>
+                  <span>
+                    {property.bedrooms} {t("dashboard.propertyManager.beds")}
+                  </span>
+                  <span>
+                    {property.bathrooms} {t("dashboard.propertyManager.baths")}
+                  </span>
                   <span>{property.area}</span>
                 </div>
                 <p className="property-price">{property.price}</p>
@@ -254,13 +429,13 @@ function PropertyManager({ type, onUpdate }) {
                   className="edit-btn"
                   onClick={() => handleEdit(property)}
                 >
-                  <FaEdit /> Edit
+                  <FaEdit /> {t("dashboard.propertyManager.edit")}
                 </button>
                 <button
                   className="delete-btn"
                   onClick={() => handleDelete(property.id)}
                 >
-                  <FaTrash /> Delete
+                  <FaTrash /> {t("dashboard.propertyManager.delete")}
                 </button>
               </div>
             </div>

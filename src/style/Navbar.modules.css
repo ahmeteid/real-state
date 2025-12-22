@@ -105,6 +105,21 @@
 
 /* End Nav Links */
 
+/* Start Navbar Actions (Language Switcher) */
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+@media (max-width: 991px) {
+    .navbar-actions {
+        display: none;
+    }
+}
+
+/* End Navbar Actions */
 
 /* Start Drop Down List */
 

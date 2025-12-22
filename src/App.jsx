@@ -9,8 +9,30 @@ import Sale_Home from "./pages/Sale_Home";
 import Rent_Home from "./pages/Rent_Home";
 import Car_Sale from "./pages/Car_Sale";
 import Dashboard from "./pages/Dashboard";
+import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 function App() {
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    // Set document direction based on language
+    document.documentElement.dir = i18n.language === "ar" ? "rtl" : "ltr";
+    document.documentElement.lang = i18n.language;
+
+    // Load saved language preference
+    const savedLanguage = localStorage.getItem("language");
+    if (savedLanguage) {
+      i18n.changeLanguage(savedLanguage);
+    }
+  }, [i18n]);
+
+  useEffect(() => {
+    // Update direction when language changes
+    document.documentElement.dir = i18n.language === "ar" ? "rtl" : "ltr";
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language]);
+
   return (
     <>
       <Routes>

@@ -1,51 +1,51 @@
 import { NavLink } from "react-router-dom";
 import "../style/Footer.modules.css";
+import { useTranslation } from "react-i18next";
 
 function Footer() {
+  const { t } = useTranslation();
+
   return (
     <>
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-section">
-            <h3>Real State</h3>
-            <p>
-              Your trusted partner in finding the perfect property. We connect
-              buyers, renters, and sellers with their dream homes and vehicles.
-            </p>
+            <h3>{t("footer.title")}</h3>
+            <p>{t("footer.description")}</p>
           </div>
 
           <div className="footer-section">
-            <h4>Quick Links</h4>
+            <h4>{t("footer.quickLinks")}</h4>
             <ul>
               <li>
-                <NavLink to="/Home">Home</NavLink>
+                <NavLink to="/Home">{t("navbar.home")}</NavLink>
               </li>
               <li>
-                <NavLink to="/About">About</NavLink>
+                <NavLink to="/About">{t("navbar.about")}</NavLink>
               </li>
               <li>
-                <NavLink to="/Contact">Contact</NavLink>
+                <NavLink to="/Contact">{t("navbar.contact")}</NavLink>
               </li>
             </ul>
           </div>
 
           <div className="footer-section">
-            <h4>Services</h4>
+            <h4>{t("footer.services")}</h4>
             <ul>
               <li>
-                <NavLink to="/Home_Sale">Home Sale</NavLink>
+                <NavLink to="/Home_Sale">{t("navbar.homeSale")}</NavLink>
               </li>
               <li>
-                <NavLink to="/Home_Rent">Home Rent</NavLink>
+                <NavLink to="/Home_Rent">{t("navbar.homeRent")}</NavLink>
               </li>
               <li>
-                <NavLink to="/Car_Sale">Car Sale</NavLink>
+                <NavLink to="/Car_Sale">{t("navbar.carSale")}</NavLink>
               </li>
             </ul>
           </div>
 
           <div className="footer-section">
-            <h4>Contact Info</h4>
+            <h4>{t("footer.contactInfo")}</h4>
             <ul>
               <li>📧 info@realstate.com</li>
               <li>📞 +1 (555) 123-4567</li>
@@ -55,7 +55,7 @@ function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; 2024 Real State. All rights reserved.</p>
+          <p>{t("footer.copyright")}</p>
         </div>
       </footer>
     </>
@@ -63,4 +63,3 @@ function Footer() {
 }
 
 export default Footer;
-

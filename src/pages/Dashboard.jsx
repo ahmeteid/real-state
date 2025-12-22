@@ -4,8 +4,10 @@ import database from "../services/database";
 import PropertyManager from "../components/dashboard/PropertyManager";
 import CarManager from "../components/dashboard/CarManager";
 import { FaHome, FaCar, FaSignOutAlt, FaChartBar } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 function Dashboard() {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("properties-sale");
   const [stats, setStats] = useState({
     propertiesForSale: 0,
@@ -42,8 +44,8 @@ function Dashboard() {
     <div className="dashboard-container">
       <div className="dashboard-sidebar">
         <div className="dashboard-header">
-          <h2>Admin Dashboard</h2>
-          <p>Real State Management</p>
+          <h2>{t("dashboard.title")}</h2>
+          <p>{t("dashboard.subtitle")}</p>
         </div>
 
         <nav className="dashboard-nav">
@@ -53,7 +55,7 @@ function Dashboard() {
             }`}
             onClick={() => setActiveTab("properties-sale")}
           >
-            <FaHome /> Properties for Sale
+            <FaHome /> {t("dashboard.propertiesForSale")}
           </button>
           <button
             className={`nav-item ${
@@ -61,19 +63,19 @@ function Dashboard() {
             }`}
             onClick={() => setActiveTab("properties-rent")}
           >
-            <FaHome /> Properties for Rent
+            <FaHome /> {t("dashboard.propertiesForRent")}
           </button>
           <button
             className={`nav-item ${activeTab === "cars" ? "active" : ""}`}
             onClick={() => setActiveTab("cars")}
           >
-            <FaCar /> Cars
+            <FaCar /> {t("dashboard.cars")}
           </button>
           <button
             className={`nav-item ${activeTab === "stats" ? "active" : ""}`}
             onClick={() => setActiveTab("stats")}
           >
-            <FaChartBar /> Statistics
+            <FaChartBar /> {t("dashboard.statistics")}
           </button>
         </nav>
 
@@ -82,7 +84,7 @@ function Dashboard() {
             className="logout-btn"
             onClick={() => (window.location.href = "/")}
           >
-            <FaSignOutAlt /> Back to Site
+            <FaSignOutAlt /> {t("dashboard.backToSite")}
           </button>
         </div>
       </div>
@@ -98,19 +100,19 @@ function Dashboard() {
           {activeTab === "cars" && <CarManager onUpdate={handleDataUpdate} />}
           {activeTab === "stats" && (
             <div className="stats-container">
-              <h2>Statistics</h2>
+              <h2>{t("dashboard.statistics")}</h2>
               <div className="stats-grid">
                 <div className="stat-card">
                   <h3>{stats.propertiesForSale}</h3>
-                  <p>Properties for Sale</p>
+                  <p>{t("dashboard.stats.propertiesForSale")}</p>
                 </div>
                 <div className="stat-card">
                   <h3>{stats.propertiesForRent}</h3>
-                  <p>Properties for Rent</p>
+                  <p>{t("dashboard.stats.propertiesForRent")}</p>
                 </div>
                 <div className="stat-card">
                   <h3>{stats.cars}</h3>
-                  <p>Cars Available</p>
+                  <p>{t("dashboard.stats.carsAvailable")}</p>
                 </div>
                 <div className="stat-card">
                   <h3>
@@ -118,7 +120,7 @@ function Dashboard() {
                       stats.propertiesForRent +
                       stats.cars}
                   </h3>
-                  <p>Total Listings</p>
+                  <p>{t("dashboard.stats.totalListings")}</p>
                 </div>
               </div>
             </div>

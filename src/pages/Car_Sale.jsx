@@ -1,8 +1,15 @@
 import { useState, useEffect } from "react";
-import { FaTachometerAlt, FaGasPump, FaCog, FaTimes, FaCalendarAlt } from "react-icons/fa";
+import {
+  FaTachometerAlt,
+  FaGasPump,
+  FaCog,
+  FaTimes,
+  FaCalendarAlt,
+} from "react-icons/fa";
 import "../style/Car.modules.css";
 import "../style/Modal.modules.css";
 import database from "../services/database";
+import ImageCarousel from "../components/ImageCarousel";
 
 function Car_Sale() {
   const [selectedCar, setSelectedCar] = useState(null);
@@ -66,7 +73,13 @@ function Car_Sale() {
               className="car-card"
               onClick={() => setSelectedCar(car)}
             >
-              <div className="car-image">🚗</div>
+              <div className="car-image">
+                <ImageCarousel
+                  images={car.images || (car.image ? [car.image] : [])}
+                  fallbackEmoji="🚗"
+                  alt={car.title}
+                />
+              </div>
               <div className="car-details">
                 <h2 className="car-title">{car.title}</h2>
                 <div className="car-year">Year: {car.year}</div>
@@ -90,21 +103,24 @@ function Car_Sale() {
       </div>
 
       {selectedCar && (
-        <div
-          className="modal-overlay"
-          onClick={() => setSelectedCar(null)}
-        >
-          <div
-            className="modal-content"
-            onClick={(e) => e.stopPropagation()}
-          >
+        <div className="modal-overlay" onClick={() => setSelectedCar(null)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button
               className="modal-close"
               onClick={() => setSelectedCar(null)}
             >
               <FaTimes />
             </button>
-            <div className="modal-image">🚗</div>
+            <div className="modal-image">
+              <ImageCarousel
+                images={
+                  selectedCar.images ||
+                  (selectedCar.image ? [selectedCar.image] : [])
+                }
+                fallbackEmoji="🚗"
+                alt={selectedCar.title}
+              />
+            </div>
             <div className="modal-body">
               <h2 className="modal-title">{selectedCar.title}</h2>
               <div className="modal-section">
@@ -140,7 +156,13 @@ function Car_Sale() {
               </div>
               <div className="modal-section">
                 <h3>Features</h3>
-                <ul style={{ color: "#555", lineHeight: "2", paddingLeft: "20px" }}>
+                <ul
+                  style={{
+                    color: "#555",
+                    lineHeight: "2",
+                    paddingLeft: "20px",
+                  }}
+                >
                   <li>Well-maintained with service records</li>
                   <li>Clean title and accident-free</li>
                   <li>Recent inspection completed</li>

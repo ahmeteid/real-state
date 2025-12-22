@@ -9,6 +9,7 @@ import {
 import "../style/Property.modules.css";
 import "../style/Modal.modules.css";
 import database from "../services/database";
+import ImageCarousel from "../components/ImageCarousel";
 
 function Rent_Home() {
   const [selectedProperty, setSelectedProperty] = useState(null);
@@ -72,7 +73,15 @@ function Rent_Home() {
               className="property-card"
               onClick={() => setSelectedProperty(property)}
             >
-              <div className="property-image">🏘️</div>
+              <div className="property-image">
+                <ImageCarousel
+                  images={
+                    property.images || (property.image ? [property.image] : [])
+                  }
+                  fallbackEmoji="🏘️"
+                  alt={property.title}
+                />
+              </div>
               <div className="property-details">
                 <h2 className="property-title">{property.title}</h2>
                 <div className="property-location">
@@ -81,10 +90,10 @@ function Rent_Home() {
                 </div>
                 <div className="property-info">
                   <span>
-                    <FaBed /> {property.bedrooms} Beds
+                    <FaBed /> {property.bedrooms}
                   </span>
                   <span>
-                    <FaBath /> {property.bathrooms} Baths
+                    <FaBath /> {property.bathrooms}
                   </span>
                   <span>
                     <FaRulerCombined /> {property.area}
@@ -110,7 +119,16 @@ function Rent_Home() {
             >
               <FaTimes />
             </button>
-            <div className="modal-image">🏘️</div>
+            <div className="modal-image">
+              <ImageCarousel
+                images={
+                  selectedProperty.images ||
+                  (selectedProperty.image ? [selectedProperty.image] : [])
+                }
+                fallbackEmoji="🏘️"
+                alt={selectedProperty.title}
+              />
+            </div>
             <div className="modal-body">
               <h2 className="modal-title">{selectedProperty.title}</h2>
               <div className="modal-section">
