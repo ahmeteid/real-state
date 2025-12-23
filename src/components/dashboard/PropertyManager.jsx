@@ -111,7 +111,7 @@ function PropertyManager({ type, onUpdate }) {
       onUpdate();
     } catch (error) {
       console.error("Error saving property:", error);
-      alert("Error saving property. Please try again.");
+      alert(t("dashboard.propertyManager.saveError"));
     }
   };
 
@@ -320,7 +320,7 @@ function PropertyManager({ type, onUpdate }) {
                         >
                           <img
                             src={image}
-                            alt={`Preview ${index + 1}`}
+                            alt={t("common.preview", { number: index + 1 })}
                             style={{
                               width: "100%",
                               height: "100px",

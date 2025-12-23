@@ -146,14 +146,14 @@ function CarManager({ onUpdate }) {
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this car?")) {
+    if (window.confirm(t("dashboard.carManager.deleteConfirm"))) {
       try {
         await database.deleteCar(id);
         loadCars();
         onUpdate();
       } catch (error) {
         console.error("Error deleting car:", error);
-        alert("Error deleting car. Please try again.");
+        alert(t("dashboard.carManager.deleteError"));
       }
     }
   };
@@ -349,7 +349,7 @@ function CarManager({ onUpdate }) {
                         >
                           <img
                             src={image}
-                            alt={`Preview ${index + 1}`}
+                            alt={t("common.preview", { number: index + 1 })}
                             style={{
                               width: "100%",
                               height: "100px",

@@ -9,6 +9,8 @@ import Sale_Home from "./pages/Sale_Home";
 import Rent_Home from "./pages/Rent_Home";
 import Car_Sale from "./pages/Car_Sale";
 import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 
@@ -36,7 +38,15 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/*"
           element={

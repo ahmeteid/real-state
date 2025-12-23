@@ -104,14 +104,58 @@
   color: white;
 }
 
-@media (max-width: 667px) {
+/* Tablet (768px) */
+@media (max-width: 768px) {
   .contact-container {
-    margin: 20px;
+    margin: 30px auto;
+    padding: 25px;
+  }
+
+  .contact-container h1 {
+    font-size: 2.2rem;
+    margin-bottom: 25px;
+  }
+
+  .contact-form {
+    gap: 18px;
+  }
+}
+
+/* Mobile (480px) */
+@media (max-width: 480px) {
+  .contact-container {
+    margin: 20px auto;
     padding: 20px;
   }
 
   .contact-container h1 {
     font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+
+  .contact-form {
+    gap: 15px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  .form-group textarea {
+    min-height: 120px;
+  }
+
+  .submit-btn {
+    padding: 12px 25px;
+    font-size: 1rem;
+    min-width: 100%;
+  }
+
+  .result-message {
+    padding: 12px;
+    font-size: 0.9rem;
   }
 }
 

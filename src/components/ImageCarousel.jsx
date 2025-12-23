@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "../style/ImageCarousel.modules.css";
+import { useTranslation } from "react-i18next";
 
 function ImageCarousel({ images, fallbackEmoji = "🏠", alt = "Image" }) {
+  const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   if (!images || images.length === 0) {
@@ -57,14 +59,14 @@ function ImageCarousel({ images, fallbackEmoji = "🏠", alt = "Image" }) {
             <button
               className="carousel-button carousel-button-prev"
               onClick={goToPrevious}
-              aria-label="Previous image"
+              aria-label={t("imageCarousel.previousImage")}
             >
               <FaChevronLeft />
             </button>
             <button
               className="carousel-button carousel-button-next"
               onClick={goToNext}
-              aria-label="Next image"
+              aria-label={t("imageCarousel.nextImage")}
             >
               <FaChevronRight />
             </button>
@@ -76,7 +78,7 @@ function ImageCarousel({ images, fallbackEmoji = "🏠", alt = "Image" }) {
                     index === currentIndex ? "active" : ""
                   }`}
                   onClick={() => goToSlide(index)}
-                  aria-label={`Go to image ${index + 1}`}
+                  aria-label={t("imageCarousel.goToImage", { number: index + 1 })}
                 />
               ))}
             </div>

@@ -69,7 +69,7 @@ function Contact() {
               placeholder={t("contact.phonePlaceholder")}
               required
               pattern="[0-9+\-\s()]+"
-              title="Please enter a valid phone number"
+              title={t("contact.phoneValidationTitle")}
             />
           </div>
           <div className="form-group">

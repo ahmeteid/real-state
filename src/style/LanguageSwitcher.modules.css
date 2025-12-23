@@ -27,6 +27,49 @@
   border-color: #007bff;
 }
 
+/* Styling for login page */
+.login-language-switcher .lang-btn {
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-language-switcher .lang-btn:hover {
+  background-color: rgba(255, 255, 255, 1);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.login-language-switcher .lang-btn.active {
+  background-color: rgba(74, 144, 226, 0.9);
+  color: #fff;
+  border-color: rgba(74, 144, 226, 0.9);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+/* Styling for dashboard */
+.dashboard-language-switcher .lang-btn {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #e8e8e8;
+  font-size: 12px;
+  padding: 5px 10px;
+}
+
+.dashboard-language-switcher .lang-btn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.dashboard-language-switcher .lang-btn.active {
+  background-color: rgba(74, 144, 226, 0.8);
+  color: white;
+  border-color: #4A90E2;
+  box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+}
+
 /* RTL support for Arabic */
 [dir="rtl"] .language-switcher {
   direction: ltr;

@@ -41,11 +41,37 @@
     -o-transform: scale(1.1);
 }
 
-@media (max-width: 667px) {
-    .logo {
-        font-size: 1.3rem;
+/* Tablet (768px) */
+@media (max-width: 768px) {
+    .Nav_Bar {
+        padding: 10px 15px;
     }
 
+    .logo {
+        font-size: 1.5rem;
+    }
+}
+
+/* Mobile (480px) */
+@media (max-width: 480px) {
+    .Nav_Bar {
+        padding: 8px 10px;
+        margin-bottom: 15px;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .drop-down-list {
+        right: 10px;
+        padding: 8px;
+    }
+
+    .drop-down-list a {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
 }
 
 /* End Logo */

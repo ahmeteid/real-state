@@ -195,34 +195,84 @@
   transform: translateY(-2px);
 }
 
-@media (max-width: 667px) {
+/* Tablet (768px) */
+@media (max-width: 768px) {
   .properties-container {
-    margin: 20px;
+    margin: 30px auto;
     padding: 20px;
   }
 
+  .page-header {
+    margin-bottom: 30px;
+  }
+
   .page-header h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
+  }
+
+  .page-header p {
+    font-size: 1.1rem;
+  }
+
+  .properties-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+  }
+}
+
+/* Mobile (480px) */
+@media (max-width: 480px) {
+  .properties-container {
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  .page-header {
+    margin-bottom: 25px;
+  }
+
+  .page-header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+
+  .page-header p {
+    font-size: 1rem;
   }
 
   .properties-grid {
     grid-template-columns: 1fr;
     gap: 20px;
+    margin-top: 20px;
   }
 
   .property-image {
-    height: 200px;
+    height: 180px;
   }
 
   .property-details {
-    padding: 20px;
+    padding: 18px;
   }
 
   .property-title {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
+  }
+
+  .property-info {
+    gap: 8px;
+  }
+
+  .property-info span {
+    font-size: 0.8rem;
+    padding: 5px 8px;
+  }
+
+  .property-description {
+    font-size: 0.85rem;
   }
 
   .property-price {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 }
