@@ -1,5 +1,7 @@
 .language-switcher {
   display: flex;
+  width: 100%;
+  justify-content: space-evenly;
   gap: 8px;
   align-items: center;
 }
@@ -49,25 +51,105 @@
 }
 
 /* Styling for dashboard */
+.dashboard-language-switcher {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  /* background-color: rgba(0, 0, 0, 0.2); */
+  background-color: transparent;
+  padding: 4px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
 .dashboard-language-switcher .lang-btn {
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   color: #e8e8e8;
-  font-size: 12px;
-  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  min-width: 44px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-language-switcher .lang-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
 }
 
 .dashboard-language-switcher .lang-btn:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.3);
   color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-language-switcher .lang-btn:hover::before {
+  width: 100px;
+  height: 100px;
 }
 
 .dashboard-language-switcher .lang-btn.active {
-  background-color: rgba(74, 144, 226, 0.8);
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
   color: white;
   border-color: #4A90E2;
-  box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+  box-shadow: 0 4px 16px rgba(74, 144, 226, 0.4),
+    0 0 0 2px rgba(74, 144, 226, 0.2);
+  font-weight: 700;
+  transform: translateY(-1px);
+}
+
+.dashboard-language-switcher .lang-btn.active::before {
+  width: 0;
+  height: 0;
+}
+
+.dashboard-language-switcher .lang-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive styles for dashboard language switcher */
+@media (max-width: 768px) {
+  .dashboard-language-switcher {
+    gap: 4px;
+    padding: 3px;
+  }
+
+  .dashboard-language-switcher .lang-btn {
+    font-size: 12px;
+    padding: 6px 12px;
+    min-width: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-language-switcher {
+    gap: 3px;
+    padding: 2px;
+  }
+
+  .dashboard-language-switcher .lang-btn {
+    font-size: 11px;
+    padding: 5px 10px;
+    min-width: 36px;
+  }
 }
 
 /* RTL support for Arabic */

@@ -4,9 +4,26 @@ import "../style/Dashboard.modules.css";
 import database from "../services/database";
 import PropertyManager from "../components/dashboard/PropertyManager";
 import CarManager from "../components/dashboard/CarManager";
-import { FaHome, FaCar, FaSignOutAlt, FaChartBar, FaCog, FaEye, FaEyeSlash, FaEdit, FaTimes, FaCheck } from "react-icons/fa";
+import {
+  FaHome,
+  FaCar,
+  FaSignOutAlt,
+  FaChartBar,
+  FaCog,
+  FaEye,
+  FaEyeSlash,
+  FaEdit,
+  FaTimes,
+  FaCheck,
+  FaBars,
+} from "react-icons/fa";
 import { useTranslation } from "react-i18next";
-import { logout, changePassword, getStoredCredentials, updateEmailAndPhone } from "../services/auth";
+import {
+  logout,
+  changePassword,
+  getStoredCredentials,
+  updateEmailAndPhone,
+} from "../services/auth";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 
 function Dashboard() {
@@ -25,12 +42,12 @@ function Dashboard() {
   });
   const [passwordError, setPasswordError] = useState("");
   const [passwordSuccess, setPasswordSuccess] = useState("");
-  
+
   const [contactInfo, setContactInfo] = useState({
     email: "",
     phone: "",
   });
-  
+
   const [isEditingContact, setIsEditingContact] = useState(false);
   const [contactForm, setContactForm] = useState({
     currentPassword: "",
@@ -40,10 +57,11 @@ function Dashboard() {
   const [contactError, setContactError] = useState("");
   const [contactSuccess, setContactSuccess] = useState("");
   const [showContactPassword, setShowContactPassword] = useState(false);
-  
+
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     loadStats();
@@ -114,8 +132,12 @@ function Dashboard() {
     }
 
     // Validate phone format (basic validation)
-    const phoneRegex = /^[+]?[(]?[0-9]{1,4}[)]?[-\s.]?[(]?[0-9]{1,4}[)]?[-\s.]?[0-9]{1,9}$/;
-    if (contactForm.phone && !phoneRegex.test(contactForm.phone.replace(/\s/g, ""))) {
+    const phoneRegex =
+      /^[+]?[(]?[0-9]{1,4}[)]?[-\s.]?[(]?[0-9]{1,4}[)]?[-\s.]?[0-9]{1,9}$/;
+    if (
+      contactForm.phone &&
+      !phoneRegex.test(contactForm.phone.replace(/\s/g, ""))
+    ) {
       setContactError(t("dashboard.settings.invalidPhone"));
       return;
     }
@@ -171,6 +193,15 @@ function Dashboard() {
     navigate("/login");
   };
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const handleNavClick = (tab) => {
+    setActiveTab(tab);
+    setIsSidebarOpen(false); // Close sidebar on mobile after navigation
+  };
+
   const handlePasswordChange = (e) => {
     setPasswordForm({
       ...passwordForm,
@@ -215,28 +246,49 @@ function Dashboard() {
     }
   };
 
-
   return (
     <div className="dashboard-container">
-      <div className="dashboard-sidebar">
+      <button
+        className="sidebar-toggle"
+        onClick={toggleSidebar}
+        aria-label="Toggle sidebar"
+      >
+        <FaBars />
+      </button>
+      {isSidebarOpen && (
+        <div
+          className="sidebar-overlay"
+          onClick={() => setIsSidebarOpen(false)}
+        ></div>
+      )}
+      <div
+        className={`dashboard-sidebar ${isSidebarOpen ? "sidebar-open" : ""}`}
+      >
         <div className="dashboard-header">
           <div className="dashboard-header-top">
             <div>
               <h2>{t("dashboard.title")}</h2>
               <p>{t("dashboard.subtitle")}</p>
             </div>
-            <div className="dashboard-language-switcher">
-              <LanguageSwitcher />
-            </div>
+          </div>
+          <div className="dashboard-language-switcher">
+            <LanguageSwitcher />
           </div>
         </div>
 
+        <button
+          className="sidebar-close-btn"
+          onClick={() => setIsSidebarOpen(false)}
+          aria-label="Close sidebar"
+        >
+          <FaTimes />
+        </button>
         <nav className="dashboard-nav">
           <button
             className={`nav-item ${
               activeTab === "properties-sale" ? "active" : ""
             }`}
-            onClick={() => setActiveTab("properties-sale")}
+            onClick={() => handleNavClick("properties-sale")}
           >
             <FaHome /> {t("dashboard.propertiesForSale")}
           </button>
@@ -244,35 +296,32 @@ function Dashboard() {
             className={`nav-item ${
               activeTab === "properties-rent" ? "active" : ""
             }`}
-            onClick={() => setActiveTab("properties-rent")}
+            onClick={() => handleNavClick("properties-rent")}
           >
             <FaHome /> {t("dashboard.propertiesForRent")}
           </button>
           <button
             className={`nav-item ${activeTab === "cars" ? "active" : ""}`}
-            onClick={() => setActiveTab("cars")}
+            onClick={() => handleNavClick("cars")}
           >
             <FaCar /> {t("dashboard.cars")}
           </button>
           <button
             className={`nav-item ${activeTab === "stats" ? "active" : ""}`}
-            onClick={() => setActiveTab("stats")}
+            onClick={() => handleNavClick("stats")}
           >
             <FaChartBar /> {t("dashboard.statistics")}
           </button>
           <button
             className={`nav-item ${activeTab === "settings" ? "active" : ""}`}
-            onClick={() => setActiveTab("settings")}
+            onClick={() => handleNavClick("settings")}
           >
             <FaCog /> {t("dashboard.settings.title")}
           </button>
         </nav>
 
         <div className="dashboard-footer">
-          <button
-            className="logout-btn"
-            onClick={handleLogout}
-          >
+          <button className="logout-btn" onClick={handleLogout}>
             <FaSignOutAlt /> {t("dashboard.logout")}
           </button>
         </div>
@@ -317,7 +366,7 @@ function Dashboard() {
           {activeTab === "settings" && (
             <div className="settings-container">
               <h2>{t("dashboard.settings.title")}</h2>
-              
+
               <div className="settings-section">
                 <h3>{t("dashboard.settings.changePassword")}</h3>
                 <form onSubmit={handlePasswordSubmit} className="settings-form">
@@ -327,7 +376,7 @@ function Dashboard() {
                   {passwordSuccess && (
                     <div className="settings-success">{passwordSuccess}</div>
                   )}
-                  
+
                   <div className="form-group">
                     <label>{t("dashboard.settings.currentPassword")}</label>
                     <div className="password-input-wrapper">
@@ -336,20 +385,24 @@ function Dashboard() {
                         name="currentPassword"
                         value={passwordForm.currentPassword}
                         onChange={handlePasswordChange}
-                        placeholder={t("dashboard.settings.currentPasswordPlaceholder")}
+                        placeholder={t(
+                          "dashboard.settings.currentPasswordPlaceholder"
+                        )}
                         required
                       />
                       <button
                         type="button"
                         className="password-toggle"
-                        onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                        onClick={() =>
+                          setShowCurrentPassword(!showCurrentPassword)
+                        }
                         tabIndex={-1}
                       >
                         {showCurrentPassword ? <FaEyeSlash /> : <FaEye />}
                       </button>
                     </div>
                   </div>
-                  
+
                   <div className="form-group">
                     <label>{t("dashboard.settings.newPassword")}</label>
                     <div className="password-input-wrapper">
@@ -358,7 +411,9 @@ function Dashboard() {
                         name="newPassword"
                         value={passwordForm.newPassword}
                         onChange={handlePasswordChange}
-                        placeholder={t("dashboard.settings.newPasswordPlaceholder")}
+                        placeholder={t(
+                          "dashboard.settings.newPasswordPlaceholder"
+                        )}
                         required
                         minLength={6}
                       />
@@ -372,7 +427,7 @@ function Dashboard() {
                       </button>
                     </div>
                   </div>
-                  
+
                   <div className="form-group">
                     <label>{t("dashboard.settings.confirmPassword")}</label>
                     <div className="password-input-wrapper">
@@ -381,21 +436,25 @@ function Dashboard() {
                         name="confirmPassword"
                         value={passwordForm.confirmPassword}
                         onChange={handlePasswordChange}
-                        placeholder={t("dashboard.settings.confirmPasswordPlaceholder")}
+                        placeholder={t(
+                          "dashboard.settings.confirmPasswordPlaceholder"
+                        )}
                         required
                         minLength={6}
                       />
                       <button
                         type="button"
                         className="password-toggle"
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        onClick={() =>
+                          setShowConfirmPassword(!showConfirmPassword)
+                        }
                         tabIndex={-1}
                       >
                         {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
                       </button>
                     </div>
                   </div>
-                  
+
                   <button type="submit" className="settings-btn">
                     {t("dashboard.settings.updatePassword")}
                   </button>
@@ -415,7 +474,7 @@ function Dashboard() {
                     </button>
                   )}
                 </div>
-                
+
                 {!isEditingContact ? (
                   <div className="contact-info-display">
                     <div className="contact-info-item">
@@ -432,7 +491,10 @@ function Dashboard() {
                     </div>
                   </div>
                 ) : (
-                  <form onSubmit={handleContactSubmit} className="settings-form">
+                  <form
+                    onSubmit={handleContactSubmit}
+                    className="settings-form"
+                  >
                     {contactError && (
                       <div className="settings-error">{contactError}</div>
                     )}
@@ -448,13 +510,17 @@ function Dashboard() {
                           name="currentPassword"
                           value={contactForm.currentPassword}
                           onChange={handleContactChange}
-                          placeholder={t("dashboard.settings.currentPasswordPlaceholder")}
+                          placeholder={t(
+                            "dashboard.settings.currentPasswordPlaceholder"
+                          )}
                           required
                         />
                         <button
                           type="button"
                           className="password-toggle"
-                          onClick={() => setShowContactPassword(!showContactPassword)}
+                          onClick={() =>
+                            setShowContactPassword(!showContactPassword)
+                          }
                           tabIndex={-1}
                         >
                           {showContactPassword ? <FaEyeSlash /> : <FaEye />}

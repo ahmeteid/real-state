@@ -116,14 +116,16 @@ function CarManager({ onUpdate }) {
       };
 
       if (editingId) {
+        // Update existing car - all changes saved to database (localStorage)
         await database.updateCar(editingId, newCar);
       } else {
+        // Add new car - saved to database (localStorage)
         await database.addCar(newCar);
       }
 
       resetForm();
-      loadCars();
-      onUpdate();
+      loadCars(); // Reload to reflect changes
+      onUpdate(); // Notify parent component
     } catch (error) {
       console.error("Error saving car:", error);
       alert(t("dashboard.carManager.saveError"));
@@ -148,9 +150,10 @@ function CarManager({ onUpdate }) {
   const handleDelete = async (id) => {
     if (window.confirm(t("dashboard.carManager.deleteConfirm"))) {
       try {
+        // Delete from database (localStorage)
         await database.deleteCar(id);
-        loadCars();
-        onUpdate();
+        loadCars(); // Reload to reflect changes
+        onUpdate(); // Notify parent component
       } catch (error) {
         console.error("Error deleting car:", error);
         alert(t("dashboard.carManager.deleteError"));

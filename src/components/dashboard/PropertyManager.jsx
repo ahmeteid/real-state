@@ -99,16 +99,16 @@ function PropertyManager({ type, onUpdate }) {
       };
 
       if (editingId) {
-        // Update existing property
+        // Update existing property - all changes saved to database (localStorage)
         await database.updateProperty(type, editingId, newProperty);
       } else {
-        // Add new property
+        // Add new property - saved to database (localStorage)
         await database.addProperty(type, newProperty);
       }
 
       resetForm();
-      loadProperties();
-      onUpdate();
+      loadProperties(); // Reload to reflect changes
+      onUpdate(); // Notify parent component
     } catch (error) {
       console.error("Error saving property:", error);
       alert(t("dashboard.propertyManager.saveError"));
@@ -133,9 +133,10 @@ function PropertyManager({ type, onUpdate }) {
   const handleDelete = async (id) => {
     if (window.confirm(t("dashboard.propertyManager.deleteConfirm"))) {
       try {
+        // Delete from database (localStorage)
         await database.deleteProperty(type, id);
-        loadProperties();
-        onUpdate();
+        loadProperties(); // Reload to reflect changes
+        onUpdate(); // Notify parent component
       } catch (error) {
         console.error("Error deleting property:", error);
         alert(t("dashboard.propertyManager.deleteError"));
