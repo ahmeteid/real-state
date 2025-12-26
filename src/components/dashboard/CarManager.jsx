@@ -438,33 +438,63 @@ function CarManager({ onUpdate }) {
         {cars.length === 0 ? (
           <div className="empty-state">{t("dashboard.carManager.noCars")}</div>
         ) : (
-          cars.map((car) => (
-            <div key={car.id} className="property-item">
-              <div className="property-info">
-                <h3>{car.title}</h3>
-                <p className="property-location">
-                  {t("dashboard.carManager.yearLabel")}: {car.year}
-                </p>
-                <div className="property-details">
-                  <span>{car.mileage}</span>
-                  <span>{translateFuel(car.fuel)}</span>
-                  <span>{translateTransmission(car.transmission)}</span>
+          cars.map((car) => {
+            const carImages = car.images || (car.image ? [car.image] : []);
+            const firstImage = carImages[0];
+            
+            return (
+              <div key={car.id} className="property-item">
+                <div className="property-image-container">
+                  {firstImage ? (
+                    <img
+                      src={firstImage}
+                      alt={car.title}
+                      className="property-thumbnail"
+                      onError={(e) => {
+                        e.target.style.display = "none";
+                        e.target.nextSibling.style.display = "flex";
+                      }}
+                    />
+                  ) : null}
+                  <div
+                    className="property-image-placeholder"
+                    style={{ display: firstImage ? "none" : "flex" }}
+                  >
+                    <span>🚗</span>
+                    <span>{t("dashboard.carManager.noImage")}</span>
+                  </div>
+                  {carImages.length > 1 && (
+                    <div className="property-image-count">
+                      +{carImages.length - 1}
+                    </div>
+                  )}
                 </div>
-                <p className="property-price">{car.price}</p>
+                <div className="property-info">
+                  <h3>{car.title}</h3>
+                  <p className="property-location">
+                    {t("dashboard.carManager.yearLabel")}: {car.year}
+                  </p>
+                  <div className="property-details">
+                    <span>{car.mileage}</span>
+                    <span>{translateFuel(car.fuel)}</span>
+                    <span>{translateTransmission(car.transmission)}</span>
+                  </div>
+                  <p className="property-price">{car.price}</p>
+                </div>
+                <div className="property-actions">
+                  <button className="edit-btn" onClick={() => handleEdit(car)}>
+                    <FaEdit /> {t("dashboard.carManager.edit")}
+                  </button>
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDelete(car.id)}
+                  >
+                    <FaTrash /> {t("dashboard.carManager.delete")}
+                  </button>
+                </div>
               </div>
-              <div className="property-actions">
-                <button className="edit-btn" onClick={() => handleEdit(car)}>
-                  <FaEdit /> {t("dashboard.carManager.edit")}
-                </button>
-                <button
-                  className="delete-btn"
-                  onClick={() => handleDelete(car.id)}
-                >
-                  <FaTrash /> {t("dashboard.carManager.delete")}
-                </button>
-              </div>
-            </div>
-          ))
+            );
+          })
         )}
       </div>
     </div>

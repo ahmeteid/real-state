@@ -201,6 +201,7 @@
       "imageTooLarge": "Resim boyutu 5MB'dan küçük olmalıdır",
       "loading": "Mülkler yükleniyor...",
       "noProperties": "Mülk bulunamadı. İlk mülkünüzü ekleyin!",
+      "noImage": "Resim Yok",
       "deleteConfirm": "Bu mülkü silmek istediğinizden emin misiniz?",
       "saveError": "Mülk kaydedilirken hata oluştu. Lütfen tekrar deneyin.",
       "deleteError": "Mülk silinirken hata oluştu. Lütfen tekrar deneyin."
@@ -245,6 +246,7 @@
       "yearLabel": "Yıl",
       "loading": "Arabalar yükleniyor...",
       "noCars": "Araba bulunamadı. İlk arabanızı ekleyin!",
+      "noImage": "Resim Yok",
       "deleteConfirm": "Bu arabayı silmek istediğinizden emin misiniz?",
       "saveError": "Araba kaydedilirken hata oluştu. Lütfen tekrar deneyin.",
       "deleteError": "Araba silinirken hata oluştu. Lütfen tekrar deneyin."

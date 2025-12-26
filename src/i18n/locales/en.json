@@ -201,6 +201,7 @@
       "imageTooLarge": "Image size must be less than 5MB",
       "loading": "Loading properties...",
       "noProperties": "No properties found. Add your first property!",
+      "noImage": "No Image",
       "deleteConfirm": "Are you sure you want to delete this property?",
       "saveError": "Error saving property. Please try again.",
       "deleteError": "Error deleting property. Please try again."
@@ -245,6 +246,7 @@
       "yearLabel": "Year",
       "loading": "Loading cars...",
       "noCars": "No cars found. Add your first car!",
+      "noImage": "No Image",
       "deleteConfirm": "Are you sure you want to delete this car?",
       "saveError": "Error saving car. Please try again.",
       "deleteError": "Error deleting car. Please try again."

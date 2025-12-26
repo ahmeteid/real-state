@@ -409,38 +409,68 @@ function PropertyManager({ type, onUpdate }) {
             {t("dashboard.propertyManager.noProperties")}
           </div>
         ) : (
-          properties.map((property) => (
-            <div key={property.id} className="property-item">
-              <div className="property-info">
-                <h3>{property.title}</h3>
-                <p className="property-location">{property.location}</p>
-                <div className="property-details">
-                  <span>
-                    {property.bedrooms} {t("dashboard.propertyManager.beds")}
-                  </span>
-                  <span>
-                    {property.bathrooms} {t("dashboard.propertyManager.baths")}
-                  </span>
-                  <span>{property.area}</span>
+          properties.map((property) => {
+            const propertyImages = property.images || (property.image ? [property.image] : []);
+            const firstImage = propertyImages[0];
+            
+            return (
+              <div key={property.id} className="property-item">
+                <div className="property-image-container">
+                  {firstImage ? (
+                    <img
+                      src={firstImage}
+                      alt={property.title}
+                      className="property-thumbnail"
+                      onError={(e) => {
+                        e.target.style.display = "none";
+                        e.target.nextSibling.style.display = "flex";
+                      }}
+                    />
+                  ) : null}
+                  <div
+                    className="property-image-placeholder"
+                    style={{ display: firstImage ? "none" : "flex" }}
+                  >
+                    <span>📷</span>
+                    <span>{t("dashboard.propertyManager.noImage")}</span>
+                  </div>
+                  {propertyImages.length > 1 && (
+                    <div className="property-image-count">
+                      +{propertyImages.length - 1}
+                    </div>
+                  )}
                 </div>
-                <p className="property-price">{property.price}</p>
+                <div className="property-info">
+                  <h3>{property.title}</h3>
+                  <p className="property-location">{property.location}</p>
+                  <div className="property-details">
+                    <span>
+                      {property.bedrooms} {t("dashboard.propertyManager.beds")}
+                    </span>
+                    <span>
+                      {property.bathrooms} {t("dashboard.propertyManager.baths")}
+                    </span>
+                    <span>{property.area}</span>
+                  </div>
+                  <p className="property-price">{property.price}</p>
+                </div>
+                <div className="property-actions">
+                  <button
+                    className="edit-btn"
+                    onClick={() => handleEdit(property)}
+                  >
+                    <FaEdit /> {t("dashboard.propertyManager.edit")}
+                  </button>
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDelete(property.id)}
+                  >
+                    <FaTrash /> {t("dashboard.propertyManager.delete")}
+                  </button>
+                </div>
               </div>
-              <div className="property-actions">
-                <button
-                  className="edit-btn"
-                  onClick={() => handleEdit(property)}
-                >
-                  <FaEdit /> {t("dashboard.propertyManager.edit")}
-                </button>
-                <button
-                  className="delete-btn"
-                  onClick={() => handleDelete(property.id)}
-                >
-                  <FaTrash /> {t("dashboard.propertyManager.delete")}
-                </button>
-              </div>
-            </div>
-          ))
+            );
+          })
         )}
       </div>
     </div>
