@@ -7,7 +7,8 @@
     "homeSale": "Ev Satışı",
     "homeRent": "Ev Kiralama",
     "carSale": "Araba Satışı",
-    "dashboard": "Kontrol Paneli"
+    "dashboard": "Kontrol Paneli",
+    "appointment": "Randevu Al"
   },
   "home": {
     "title": "Emlak'a Hoş Geldiniz",
@@ -278,5 +279,35 @@
       "editContactInfo": "Düzenle",
       "cancel": "İptal"
     }
+  },
+  "appointment": {
+    "title": "Randevu Al",
+    "subtitle": "Mülkleri veya arabaları görmek için bir ziyaret planlayın",
+    "personalInfo": "Kişisel Bilgiler",
+    "name": "Ad Soyad",
+    "namePlaceholder": "Adınızı ve soyadınızı girin",
+    "email": "E-posta Adresi",
+    "emailPlaceholder": "E-postanızı girin",
+    "phone": "Telefon Numarası",
+    "phonePlaceholder": "Telefon numaranızı girin",
+    "appointmentDetails": "Randevu Detayları",
+    "appointmentType": "Randevu Tipi",
+    "propertySale": "Satılık Mülk",
+    "propertyRent": "Kiralık Mülk",
+    "car": "Araba",
+    "selectItem": "Ürün Seç",
+    "selectItemPlaceholder": "Bir mülk veya araba seçin",
+    "date": "Tarih",
+    "time": "Saat",
+    "additionalInfo": "Ek Bilgiler",
+    "message": "Mesaj",
+    "messagePlaceholder": "Ek notlar veya gereksinimler (isteğe bağlı)",
+    "submit": "Randevu Al",
+    "submitting": "Rezervasyon yapılıyor...",
+    "successTitle": "Randevu Alındı!",
+    "successMessage": "Randevunuz başarıyla planlandı.",
+    "appointmentId": "Randevu No",
+    "successNote": "Randevunuzu onaylamak için yakında sizinle iletişime geçeceğiz. Lütfen referans için randevu numaranızı saklayın.",
+    "error": "Randevunuz rezerve edilirken bir hata oluştu. Lütfen tekrar deneyin."
   }
 }

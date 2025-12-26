@@ -10,6 +10,7 @@ import Rent_Home from "./pages/Rent_Home";
 import Car_Sale from "./pages/Car_Sale";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
+import Appointment from "./pages/Appointment";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
@@ -60,6 +61,7 @@ function App() {
                 <Route path="/Home_Sale" element={<Sale_Home />} />
                 <Route path="/Home_Rent" element={<Rent_Home />} />
                 <Route path="/Car_Sale" element={<Car_Sale />} />
+                <Route path="/Appointment" element={<Appointment />} />
               </Routes>
               <Footer />
             </>

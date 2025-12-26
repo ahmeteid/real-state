@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import "../style/Navbar.modules.css";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { FaTimes } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 function Navbar() {
   const { t } = useTranslation();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  const menuBarRef = useRef(null);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -17,11 +20,44 @@ function Navbar() {
     setIsDropdownOpen(false);
   };
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        menuBarRef.current &&
+        !menuBarRef.current.contains(event.target)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.body.style.overflow = "hidden"; // Prevent body scroll when menu is open
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.body.style.overflow = "";
+    };
+  }, [isDropdownOpen]);
+
   return (
     <>
+      {/* Overlay for mobile menu */}
+      {isDropdownOpen && (
+        <div className="navbar-overlay" onClick={closeDropdown}></div>
+      )}
+
       <nav className="Nav_Bar">
         <div className="logo">
-          <NavLink to={"/Home"}>{t("navbar.logo")}</NavLink>
+          <NavLink to={"/Home"} onClick={closeDropdown}>
+            {t("navbar.logo")}
+          </NavLink>
         </div>
         <ul className="nav-links">
           <li>
@@ -43,13 +79,19 @@ function Navbar() {
             <NavLink to={"/Car_Sale"}>{t("navbar.carSale")}</NavLink>
           </li>
           <li>
+            <NavLink to={"/Appointment"}>{t("navbar.appointment")}</NavLink>
+          </li>
+          <li>
             <NavLink to={"/dashboard"}>{t("navbar.dashboard")}</NavLink>
           </li>
         </ul>
         <div className="navbar-actions">
           <LanguageSwitcher />
         </div>
-        <div className={`drop-list ${isDropdownOpen ? "active" : ""}`}>
+        <div
+          ref={dropdownRef}
+          className={`drop-list ${isDropdownOpen ? "active" : ""}`}
+        >
           <ul className="drop-down-list">
             <li>
               <NavLink to={"/Home"} onClick={closeDropdown}>
@@ -82,18 +124,28 @@ function Navbar() {
               </NavLink>
             </li>
             <li>
+              <NavLink to={"/Appointment"} onClick={closeDropdown}>
+                {t("navbar.appointment")}
+              </NavLink>
+            </li>
+            <li>
               <NavLink to={"/dashboard"} onClick={closeDropdown}>
                 {t("navbar.dashboard")}
               </NavLink>
             </li>
-            <li>
+            <li className="language-switcher-item">
               <LanguageSwitcher />
             </li>
           </ul>
         </div>
-        <div className="menu-bar" onClick={toggleDropdown}>
-          <span>
-            <GiHamburgerMenu />
+        <div
+          ref={menuBarRef}
+          className="menu-bar"
+          onClick={toggleDropdown}
+          aria-label="Toggle menu"
+        >
+          <span className={isDropdownOpen ? "menu-open" : ""}>
+            {isDropdownOpen ? <FaTimes /> : <GiHamburgerMenu />}
           </span>
         </div>
       </nav>

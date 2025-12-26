@@ -7,7 +7,8 @@
     "homeSale": "بيع منازل",
     "homeRent": "إيجار منازل",
     "carSale": "بيع سيارات",
-    "dashboard": "لوحة التحكم"
+    "dashboard": "لوحة التحكم",
+    "appointment": "حجز موعد"
   },
   "home": {
     "title": "مرحباً بك في العقارات",
@@ -278,5 +279,35 @@
       "editContactInfo": "تعديل",
       "cancel": "إلغاء"
     }
+  },
+  "appointment": {
+    "title": "حجز موعد",
+    "subtitle": "حدد موعداً لزيارة العقارات أو السيارات",
+    "personalInfo": "المعلومات الشخصية",
+    "name": "الاسم الكامل",
+    "namePlaceholder": "أدخل اسمك الكامل",
+    "email": "عنوان البريد الإلكتروني",
+    "emailPlaceholder": "أدخل بريدك الإلكتروني",
+    "phone": "رقم الهاتف",
+    "phonePlaceholder": "أدخل رقم هاتفك",
+    "appointmentDetails": "تفاصيل الموعد",
+    "appointmentType": "نوع الموعد",
+    "propertySale": "عقار للبيع",
+    "propertyRent": "عقار للإيجار",
+    "car": "سيارة",
+    "selectItem": "اختر العنصر",
+    "selectItemPlaceholder": "اختر عقاراً أو سيارة",
+    "date": "التاريخ",
+    "time": "الوقت",
+    "additionalInfo": "معلومات إضافية",
+    "message": "رسالة",
+    "messagePlaceholder": "أي ملاحظات أو متطلبات إضافية (اختياري)",
+    "submit": "حجز الموعد",
+    "submitting": "جاري الحجز...",
+    "successTitle": "تم حجز الموعد!",
+    "successMessage": "تم جدولة موعدك بنجاح.",
+    "appointmentId": "رقم الموعد",
+    "successNote": "سنتصل بك قريباً لتأكيد موعدك. يرجى الاحتفاظ برقم الموعد للمرجع.",
+    "error": "حدث خطأ أثناء حجز موعدك. يرجى المحاولة مرة أخرى."
   }
 }

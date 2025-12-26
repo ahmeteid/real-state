@@ -7,7 +7,8 @@
     "homeSale": "Home Sale",
     "homeRent": "Home Rent",
     "carSale": "Car Sale",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "appointment": "Book Appointment"
   },
   "home": {
     "title": "Welcome to Real State",
@@ -278,5 +279,35 @@
       "editContactInfo": "Edit",
       "cancel": "Cancel"
     }
+  },
+  "appointment": {
+    "title": "Book an Appointment",
+    "subtitle": "Schedule a visit to view properties or cars",
+    "personalInfo": "Personal Information",
+    "name": "Full Name",
+    "namePlaceholder": "Enter your full name",
+    "email": "Email Address",
+    "emailPlaceholder": "Enter your email",
+    "phone": "Phone Number",
+    "phonePlaceholder": "Enter your phone number",
+    "appointmentDetails": "Appointment Details",
+    "appointmentType": "Appointment Type",
+    "propertySale": "Property for Sale",
+    "propertyRent": "Property for Rent",
+    "car": "Car",
+    "selectItem": "Select Item",
+    "selectItemPlaceholder": "Choose a property or car",
+    "date": "Date",
+    "time": "Time",
+    "additionalInfo": "Additional Information",
+    "message": "Message",
+    "messagePlaceholder": "Any additional notes or requirements (optional)",
+    "submit": "Book Appointment",
+    "submitting": "Booking...",
+    "successTitle": "Appointment Booked!",
+    "successMessage": "Your appointment has been successfully scheduled.",
+    "appointmentId": "Appointment ID",
+    "successNote": "We will contact you shortly to confirm your appointment. Please keep your appointment ID for reference.",
+    "error": "An error occurred while booking your appointment. Please try again."
   }
 }

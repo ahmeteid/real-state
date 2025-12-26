@@ -44,9 +44,9 @@ function initializeCredentials() {
 
 /**
  * Get stored credentials
- * @returns {Object} - Credentials object with username and password
+ * @returns {Object} - Credentials object with username, password, email, and phone
  */
-function getCredentials() {
+export function getCredentials() {
   return initializeCredentials();
 }
 
