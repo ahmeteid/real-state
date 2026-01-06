@@ -1,0 +1,139 @@
+.footer {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  color: var(--secondary-color);
+  margin-top: 80px;
+  padding-top: 50px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.footer-section h3 {
+  color: #4A90E2;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+}
+
+.footer-section h4 {
+  color: #4A90E2;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+}
+
+.footer-section p {
+  line-height: 1.8;
+  color: #e8e8e8;
+  font-size: 0.95rem;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section ul li {
+  margin-bottom: 12px;
+}
+
+.footer-section ul li a {
+  color: #e8e8e8;
+  text-decoration: none;
+  transition: var(--timing);
+  display: inline-block;
+}
+
+.footer-section ul li a:hover {
+  color: #4A90E2;
+  transform: translateX(5px);
+}
+
+.footer-section ul li {
+  color: #e8e8e8;
+  font-size: 0.95rem;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px 30px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.footer-bottom p {
+  color: #e8e8e8;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Tablet (768px) */
+@media (max-width: 768px) {
+  .footer {
+    margin-top: 60px;
+    padding-top: 40px;
+  }
+
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    padding: 0 25px;
+  }
+
+  .footer-section h3 {
+    font-size: 1.5rem;
+  }
+
+  .footer-section h4 {
+    font-size: 1.1rem;
+  }
+}
+
+/* Mobile (480px) */
+@media (max-width: 480px) {
+  .footer {
+    margin-top: 40px;
+    padding-top: 30px;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding: 0 20px;
+    margin-bottom: 25px;
+  }
+
+  .footer-section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+  }
+
+  .footer-section h4 {
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+
+  .footer-section p,
+  .footer-section ul li {
+    font-size: 0.9rem;
+  }
+
+  .footer-section ul li {
+    margin-bottom: 10px;
+  }
+
+  .footer-bottom {
+    padding: 15px 20px;
+  }
+
+  .footer-bottom p {
+    font-size: 0.85rem;
+  }
+}
+

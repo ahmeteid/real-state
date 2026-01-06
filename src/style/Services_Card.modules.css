@@ -1,0 +1,87 @@
+.s-container {
+    padding: 20px 30px;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0 auto;
+    transform: translate(0%, 50%);
+    -webkit-transform: translate(0%, 50%);
+    -moz-transform: translate(0%, 50%);
+    -ms-transform: translate(0%, 50%);
+    -o-transform: translate(0%, 50%);
+}
+
+@media (max-width: 667px) {
+    .s-container {
+        width: 90%;
+        flex-direction: column;
+        transform: translate(0%, 0%);
+        -webkit-transform: translate(0%, 0%);
+        -moz-transform: translate(0%, 0%);
+        -ms-transform: translate(0%, 0%);
+        -o-transform: translate(0%, 0%);
+    }
+}
+
+@media (min-width: 668px) and (max-width: 991px) {
+    .s-container {
+        width: 90%;
+        /* flex-direction: column; */
+    }
+}
+
+.s-container .card {
+    border: 2px solid #e0e6ed;
+    background-color: var(--secondary-color);
+    padding: 25px 30px;
+    align-items: center;
+    width: 180px;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: var(--border-radius);
+    -webkit-border-radius: var(--border-radius);
+    -moz-border-radius: var(--border-radius);
+    -ms-border-radius: var(--border-radius);
+    -o-border-radius: var(--border-radius);
+    transition: var(--timing);
+    -webkit-transition: var(--timing);
+    -moz-transition: var(--timing);
+    -ms-transition: var(--timing);
+    -o-transition: var(--timing);
+}
+
+@media (max-width: 667px) {
+    .s-container .card {
+        margin-bottom: 20px;
+    }
+}
+
+.s-container .card:hover {
+    box-shadow: 0 8px 24px rgba(74, 144, 226, 0.15);
+    background-color: var(--accent-color);
+    transform: translateY(-3px);
+}
+
+.s-container .card:hover .title {
+    color: var(--secondary-color);
+}
+
+.s-container .card .title {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: var(--accent-color);
+    font-size: 1.3rem;
+    font-weight: 700;
+    transition: var(--timing);
+    -webkit-transition: var(--timing);
+    -moz-transition: var(--timing);
+    -ms-transition: var(--timing);
+    -o-transition: var(--timing);
+}

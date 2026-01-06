@@ -1,0 +1,158 @@
+.image-carousel {
+  width: 100%;
+  position: relative;
+}
+
+.carousel-image-container {
+  width: 100%;
+  height: 240px;
+  background: var(--gradient-friendly);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: all 0.3s ease;
+  color: var(--accent-color);
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-button:hover {
+  background-color: white;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-button-prev {
+  left: 10px;
+}
+
+.carousel-button-next {
+  right: 10px;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+}
+
+.carousel-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.carousel-indicator:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  transform: scale(1.2);
+}
+
+.carousel-indicator.active {
+  background-color: white;
+  width: 24px;
+  border-radius: 4px;
+}
+
+.carousel-counter {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  z-index: 2;
+}
+
+/* Modal carousel styles */
+.modal-image .image-carousel .carousel-image-container {
+  height: 300px;
+}
+
+@media (max-width: 667px) {
+  .carousel-image-container {
+    height: 200px;
+  }
+
+  .carousel-button {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+
+  .carousel-button-prev {
+    left: 5px;
+  }
+
+  .carousel-button-next {
+    right: 5px;
+  }
+
+  .carousel-indicators {
+    bottom: 10px;
+    gap: 6px;
+  }
+
+  .carousel-indicator {
+    width: 6px;
+    height: 6px;
+  }
+
+  .carousel-indicator.active {
+    width: 20px;
+  }
+}
